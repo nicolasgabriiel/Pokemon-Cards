@@ -1,0 +1,19 @@
+.container {
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+h1 {
+	text-align: center;
+}
+
+.pokemon-list {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.pokemon {
+	width: 150px;
+	margin: 10px;
+	text-align: center;
+}

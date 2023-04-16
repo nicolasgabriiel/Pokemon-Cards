@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pokedex</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>Pokedex</h1>
+		<div class="pokemon-list"></div>
+	</div>
+
+	<script>
+		$(document).ready(function() {
+			var pokemonList = $('.pokemon-list');
+
+			// Fazer uma chamada AJAX para obter os dados da API
+			$.ajax({
+				url: 'https://pokeapi.co/api/v2/pokemon/',
+				method: 'GET',
+				success: function(data) {
+					// Iterar pelos resultados e criar elementos HTML para cada pokemon
+					for(var i = 0; i < data.results.length; i++) {
+						var pokemon = data.results[i];
+						var pokemonDiv = $('<div class="pokemon"></div>');
+						var pokemonName = $('<h2>' + pokemon.name + '</h2>');
+
+						// Fazer uma nova chamada AJAX para obter mais detalhes do pokemon
+						$.ajax({
+							url: pokemon.url,
+							method: 'GET',
+							success: function(pokemonData) {
+								var pokemonImage = $('<img src="' + pokemonData.sprites.front_default + '">');
+								pokemonDiv.append(pokemonName);
+								pokemonDiv.append(pokemonImage);
+							}
+						});
+
+						pokemonList.append(pokemonDiv);
+					}
+				}
+			});
+		});
+	</script>
+</body>
+</html>
