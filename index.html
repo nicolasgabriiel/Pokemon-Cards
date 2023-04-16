@@ -24,7 +24,7 @@
 					for(var i = 0; i < data.results.length; i++) {
 						var pokemon = data.results[i];
 						var pokemonDiv = $('<div class="pokemon"></div>');
-						var pokemonName = $('<h2>' + pokemon.name + '</h2>');
+						
 
 						// Fazer uma nova chamada AJAX para obter mais detalhes do pokemon
 						$.ajax({
@@ -32,6 +32,7 @@
 							method: 'GET',
 							success: function(pokemonData) {
 								var pokemonImage = $('<img src="' + pokemonData.sprites.front_default + '">');
+                                var pokemonName = $('<h2>' + pokemon.name + '</h2>');
 								pokemonDiv.append(pokemonName);
 								pokemonDiv.append(pokemonImage);
 							}
